@@ -22,7 +22,7 @@ require("includes/common.php");
   $address = mysqli_real_escape_string($con, $address);
 
   $regex_email = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
-  $regex_num = "/^[789][0-9]{9}$/";
+  $regex_num = "/^[6789][0-9]{9}$/";
 
   $query = "SELECT * FROM users WHERE email='$email'";
   $result = mysqli_query($con, $query)or die($mysqli_error($con));
@@ -32,10 +32,10 @@ require("includes/common.php");
     $m = "<span class='red'>Email Already Exists</span>";
     header('location: signup.php?m1=' . $m);
   } else if (!preg_match($regex_email, $email)) {
-    $m = "<span class='red'>Not a valid Email Id</span>";
+    $m = "<span class='red'>Not a valid Email (Please use common emails).</span>";
     header('location: signup.php?m1=' . $m);
   } else if (!preg_match($regex_num, $contact)) {
-    $m = "<span class='red'>Not a valid phone number</span>";
+    $m = "<span class='red'>Not a valid phone number (Max length 10 Characters).</span>";
     header('location: signup.php?m2=' . $m);
   } else {
 

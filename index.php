@@ -90,7 +90,7 @@ if (isset($_SESSION['email'])) {
        <footer class="fo">
            <div class="container">
                <center>
-                   <p>Copyright <small>&copy;</small> Secret Store | All Rights Reserved</p>
+                   <p>Copyright <small>&copy;</small> Secret Store | All Rights Reserved. Service Number: +30 6983871852.</p>
                </center>
            </div>
            
