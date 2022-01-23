@@ -19,6 +19,24 @@ if (!isset($_SESSION['email'])) {
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
          <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <link rel="stylesheet" href="css/style.css"/>
+    <style>
+      .center {
+            position: absolute;
+            top: 32%;
+            width: 100%;
+            text-align: center;
+            font-size: 15px;
+      }
+      .order2 {
+          position: absolute;
+          top: 36%;
+          text-align: center;
+          right: 770px;
+          width: 100%;
+          font-size: 16px;
+      }
+
+    </style>
     </head>
     <body>
         <?php
@@ -36,8 +54,199 @@ if (!isset($_SESSION['email'])) {
             </div>
              
         </div>
-        
+        <div class="order2">
+          <form method="post" action="">
+            <select name="sort" onchange="this.form.submit()">
+                <option value="" disabled selected>Order by ...</option>
+                <option value="price_asc">Price ascending</option>
+                <option value="price_desc">Price descending</option>
+                <option value="product_name_asc">Product Name ascending</option>
+                <option value="product_name_desc">Product Name descending</option>
+                <!--<option value="name">Product Name</option>-->
+                <!--<option value="price">Price</option>-->                
+            </select>
+
+            <input type="submit" name="submit" value="Order by">
+            </form>
+      </div>
+            <div class="center">
+              <form action="" method="post">
+                <input type="text" name="search" placeholder="Search">
+                <input type ="Submit" name="Submit">
+              </form>
+            </div>
+            <?php
+
+            if(isset($_POST['Submit'])){
+              if(!empty($_POST['search'])) {
+                $con = mysqli_connect("localhost", "root", "", "Online Shop") or die(mysqli_error($con));
+                $search = mysqli_real_escape_string($con,$_POST['search']);
+                $keys = explode(" ",$search);
+                $sql = "SELECT * from items where name like '%$search%'";
                 
+                foreach($keys as $k){
+                  $sql .= " OR name LIKE '%$k%' ";
+                }
+
+                $result = mysqli_query($con,$sql);
+                
+                if(mysqli_num_rows($result) > 0){
+                          echo "<table>";
+                              echo "<tr>";
+                                  echo "<th>id</th>";
+                                  echo "<th>name</th>";
+                                  echo "<th>price</th>";
+                              echo "</tr>";
+                          while($row = mysqli_fetch_array($result)){
+                              echo "<tr>";
+                                  echo "<td>" . $row['id'] . "</td>";
+                                  echo "<td>" . $row['name'] . "</td>";
+                                  echo "<td>" . $row['price'] . "</td>";
+                              echo "</tr>";
+                          }
+                          echo "</table>";
+                          // Close result set
+                          mysqli_free_result($result);
+                } else{
+                          echo "No records matching your query were found.";
+                }
+
+                $con->close();
+              }else {
+                echo 'Search Field Empty';
+              }
+            }
+            ?>
+
+            <?php
+            if(isset($_POST['submit'])){
+              if(!empty($_POST['sort'])) {
+                $selected = $_POST['sort'];
+
+                /* Attempt MySQL server connection. Assuming you are running MySQL
+                server with default setting (user 'root' with no password) */
+                $con = mysqli_connect("localhost", "root", "", "Online Shop") or die(mysqli_error($con));
+                 
+                // Check connection
+                if($con === false){
+                    die("ERROR: Could not connect. " . mysqli_connect_error());
+                }
+                if($selected == 'price_asc'){ 
+                  // Attempt select query execution with order by clause
+                  $sql = "SELECT * FROM items ORDER BY price ASC";
+                  if($result = mysqli_query($con, $sql)){
+                      if(mysqli_num_rows($result) > 0){
+                          echo "<table>";
+                              echo "<tr>";
+                                  echo "<th>id</th>";
+                                  echo "<th>name</th>";
+                                  echo "<th>price</th>";
+                              echo "</tr>";
+                          while($row = mysqli_fetch_array($result)){
+                              echo "<tr>";
+                                  echo "<td>" . $row['id'] . "</td>";
+                                  echo "<td>" . $row['name'] . "</td>";
+                                  echo "<td>" . $row['price'] . "</td>";
+                              echo "</tr>";
+                          }
+                          echo "</table>";
+                          // Close result set
+                          mysqli_free_result($result);
+                      }
+                  }
+                }else if($selected == 'price_desc'){
+                  // Attempt select query execution with order by clause
+                  $sql = "SELECT * FROM items ORDER BY price DESC";
+                  if($result = mysqli_query($con, $sql)){
+                      if(mysqli_num_rows($result) > 0){
+                          echo "<table>";
+                              echo "<tr>";
+                                  echo "<th>id</th>";
+                                  echo "<th>name</th>";
+                                  echo "<th>price</th>";
+                              echo "</tr>";
+                          while($row = mysqli_fetch_array($result)){
+                              echo "<tr>";
+                                  echo "<td>" . $row['id'] . "</td>";
+                                  echo "<td>" . $row['name'] . "</td>";
+                                  echo "<td>" . $row['price'] . "</td>";
+                              echo "</tr>";
+                          }
+                          echo "</table>";
+                          // Close result set
+                          mysqli_free_result($result);
+                      }
+                  }
+                }else if($selected == 'product_name_asc'){
+                  // Attempt select query execution with order by clause
+                  $sql = "SELECT * FROM items ORDER BY name ASC";
+                  if($result = mysqli_query($con, $sql)){
+                      if(mysqli_num_rows($result) > 0){
+                          echo "<table>";
+                              echo "<tr>";
+                                  echo "<th>id</th>";
+                                  echo "<th>name</th>";
+                                  echo "<th>price</th>";
+                              echo "</tr>";
+                          while($row = mysqli_fetch_array($result)){
+                              echo "<tr>";
+                                  echo "<td>" . $row['id'] . "</td>";
+                                  echo "<td>" . $row['name'] . "</td>";
+                                  echo "<td>" . $row['price'] . "</td>";
+                              echo "</tr>";
+                          }
+                          echo "</table>";
+                          // Close result set
+                          mysqli_free_result($result);
+                      }
+                  }
+                }else if($selected == 'product_name_desc'){
+                  // Attempt select query execution with order by clause
+                  $sql = "SELECT * FROM items ORDER BY name DESC";
+                  if($result = mysqli_query($con, $sql)){
+                      if(mysqli_num_rows($result) > 0){
+                          echo "<table>";
+                              echo "<tr>";
+                                  echo "<th>id</th>";
+                                  echo "<th>name</th>";
+                                  echo "<th>price</th>";
+                              echo "</tr>";
+                          while($row = mysqli_fetch_array($result)){
+                              echo "<tr>";
+                                  echo "<td>" . $row['id'] . "</td>";
+                                  echo "<td>" . $row['name'] . "</td>";
+                                  echo "<td>" . $row['price'] . "</td>";
+                              echo "</tr>";
+                          }
+                          echo "</table>";
+                          // Close result set
+                          mysqli_free_result($result);
+                      }
+                  }
+                } else{
+                    echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
+                }
+                 
+                // Close connection
+                mysqli_close($con);
+              } else {
+                echo 'Please select the value.';
+              }
+            } else{
+              /* Attempt MySQL server connection. Assuming you are running MySQL
+              server with default setting (user 'root' with no password) */
+              $con = mysqli_connect("localhost", "root", "", "Online Shop") or die(mysqli_error($con));
+               
+              // Check connection
+              if($con === false){
+                  die("ERROR: Could not connect. " . mysqli_connect_error());
+              }
+               
+              // Attempt select query execution with order by clause
+              $sql = "SELECT * FROM items";
+            }
+          ?>
+          
                  <div class="container">
               <div class="row text-center">
                   <div class="col-md-3 col-sm-6">

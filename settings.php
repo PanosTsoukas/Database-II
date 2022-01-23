@@ -13,7 +13,7 @@ if (!isset($_SESSION['email'])) {
        
         
                 <meta charset="UTF-8">
-        <title>Lifestyle Store | Settings</title>
+        <title>Secret Store | Settings</title>
          <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <script type="text/javascript" src="bootstrap/js/jquery-3.5.0.min.js"></script>
         <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>

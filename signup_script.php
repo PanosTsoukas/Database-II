@@ -37,6 +37,9 @@ require("includes/common.php");
   } else if (!preg_match($regex_num, $contact)) {
     $m = "<span class='red'>Not a valid phone number (Max length 10 Characters).</span>";
     header('location: signup.php?m2=' . $m);
+  } else if (!preg_match($regex_num, $password)) {
+    $m = "<span class='red'>Need at least 6 characters, not uppercase letters.</span>";
+    header('location: signup.php?m2=' . $m);
   } else {
 
     $query = "INSERT INTO users(name, email, password, contact, city, address)VALUES('" . $name . "','" . $email . "','" . $password . "','" . $contact . "','" . $city . "','" . $address . "')";

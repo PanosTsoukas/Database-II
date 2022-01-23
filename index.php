@@ -33,7 +33,7 @@ if (isset($_SESSION['email'])) {
                <div id="banner_content">
                    <h1><b>Electronic Secret World</b></h1>
                    <p><b>40% OFF on premium brands. Valid until 02/2022</b></p>
-                   <a href="products.php" target="_blank"> <button class="btn btn-danger btn-lg active"><b>Shop Now</b> </button></a>
+                   <a href="login.php" target="_blank"> <button class="btn btn-danger btn-lg active"><b>Shop Now</b> </button></a>
                    
                </div>
                 </center>
@@ -90,7 +90,18 @@ if (isset($_SESSION['email'])) {
        <footer class="fo">
            <div class="container">
                <center>
-                   <p>Copyright <small>&copy;</small> Secret Store | All Rights Reserved. Service Number: +30 6983871852.</p>
+                   <p>Copyright <small>&copy;</small> Secret Store | All Rights Reserved | Service Number: +30 6983871852 | Shop Address: Solonos 5 - Volos - Greece</p>
+                   <p>
+                      <a href="https://www.instagram.com/user" target="_blank">
+                          <img src="img\instagram2.png" alt="Instagram" />
+                      </a>
+                      <a href="https://www.facebook.com/user" target="_blank">
+                          <img src="img\facebook.png" alt="Facebook" />
+                      </a>
+                      <a href="https://www.twitter.com/user" target="_blank">
+                          <img src="img\twitter.png" alt="Twitter" />
+                      </a>
+                  </p>
                </center>
            </div>
            
