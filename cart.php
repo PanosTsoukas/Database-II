@@ -64,6 +64,7 @@
                                           <td></td>
                                           <td>Total</td>
                                           <td>EUR " . $sum . "</td>
+                                          <td><a href='cart-delete-all.php?id=".$user_id."' class='btn btn-primary'>Remove All</a></td>
                                           <td><a href='success.php?itemsid=".$id."'class='btn btn-primary'>Confirm Order</a></td>
                                           </tr>";
                                 ?>

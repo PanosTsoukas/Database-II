@@ -1,4 +1,3 @@
-
 <?php
 require("includes/common.php");
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
